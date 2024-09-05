@@ -9,24 +9,49 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.buchuan.picturegallary.R;
 import com.buchuan.picturegallary.databinding.FragmentHomeBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
+    private RecyclerView recyclerView;
+    private MyAdapter myAdapter;
+    private List<Person> personList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        //binding = FragmentHomeBinding.inflate(inflater, container, false);
+        //View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        //final TextView textView = binding.textHome;
+        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        // 初始化 RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // 初始化数据
+        personList = new ArrayList<>();
+        personList.add(new Person("Item 1", 10));
+        personList.add(new Person("Item 2", 11));
+        personList.add(new Person("Item 3", 12));
+
+        // 设置适配器
+        myAdapter = new MyAdapter(personList);
+        recyclerView.setAdapter(myAdapter);
+        return view;
     }
 
     @Override
