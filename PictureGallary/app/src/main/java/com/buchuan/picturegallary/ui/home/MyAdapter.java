@@ -1,5 +1,7 @@
 package com.buchuan.picturegallary.ui.home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.buchuan.picturegallary.DetailActivity;
 import com.buchuan.picturegallary.R;
 
 import java.util.List;
@@ -14,10 +17,12 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Person> personList;
+    private Context context;
 
     // Constructor for passing the data list
-    public MyAdapter(List<Person> personList) {
+    public MyAdapter(List<Person> personList, Context context) {
         this.personList = personList;
+        this.context = context;
     }
 
     // ViewHolder class for caching view references
@@ -44,6 +49,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Person person = personList.get(position);
         holder.textView.setText(person.getName() + ", Age: " + person.getAge());
+
+        holder.itemView.setOnClickListener(v ->{
+           Intent intent = new Intent(context, DetailActivity.class);
+           intent.putExtra("item_name", person.getName() + ", Age: " + person.getAge());
+           context.startActivity(intent);
+        });
     }
 
     // Return the size of the dataset (invoked by the layout manager)

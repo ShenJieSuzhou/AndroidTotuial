@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         personList.add(new Person("Item 3", 12));
 
         // 设置适配器
-        myAdapter = new MyAdapter(personList);
+        myAdapter = new MyAdapter(personList,getActivity());
         recyclerView.setAdapter(myAdapter);
         return view;
     }
