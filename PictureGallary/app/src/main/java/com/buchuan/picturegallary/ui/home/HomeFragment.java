@@ -44,12 +44,13 @@ public class HomeFragment extends Fragment {
 
         // 初始化数据
         personList = new ArrayList<>();
-        personList.add(new Person("Item 1", 10));
-        personList.add(new Person("Item 2", 11));
-        personList.add(new Person("Item 3", 12));
+        for (int i = 0; i < 100; i++)
+        {
+            personList.add(new Person("Item "+(i+1), i+1));
+        }
 
         // 设置适配器
-        myAdapter = new MyAdapter(personList,getActivity());
+        myAdapter = new MyAdapter(personList, getActivity());
         recyclerView.setAdapter(myAdapter);
         return view;
     }

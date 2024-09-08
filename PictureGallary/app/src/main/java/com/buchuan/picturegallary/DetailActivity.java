@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -18,15 +19,23 @@ public class DetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
 
+        // 向左显示导航栏
+        // 设置 Toolbar 作为 ActionBar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // 启用返回按钮
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 显示返回按钮
+            //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);  // 自定义返回按钮图标（可选）
+        }
+
         // 获取传递的数据
         String itemName = getIntent().getStringExtra("item_name");
 
         // 显示 item 数据
         TextView textView = findViewById(R.id.detailTextView);
         textView.setText(itemName);
-
-        // 显示返回按钮
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
