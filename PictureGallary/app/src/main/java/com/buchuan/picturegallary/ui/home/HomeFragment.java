@@ -24,7 +24,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<Person> personList;
+    //private List<Person> personList;
+    private List<ImageItem> imageList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,14 +44,20 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // 初始化数据
-        personList = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
-        {
-            personList.add(new Person("Item "+(i+1), i+1));
+//        personList = new ArrayList<>();
+//        for (int i = 0; i < 100; i++)
+//        {
+//            personList.add(new Person("Item "+(i+1), i+1));
+//        }
+        // 循环生成 RoboHash URL 并添加到列表
+        imageList = new ArrayList<>();
+        for (int i = 1; i <= 20; i++) {
+            String imageUrl = "https://robohash.org/" + i;
+            imageList.add(new ImageItem(imageUrl));
         }
 
         // 设置适配器
-        myAdapter = new MyAdapter(personList, getActivity());
+        myAdapter = new MyAdapter(imageList, getActivity());
         recyclerView.setAdapter(myAdapter);
         return view;
     }
