@@ -50,8 +50,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        Person person = personList.get(position);
-//        holder.textView.setText(person.getName() + ", Age: " + person.getAge());
         ImageItem imageItem = imageList.get(position);
 
         // 使用 Glide 加载图片
